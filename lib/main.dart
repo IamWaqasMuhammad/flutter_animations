@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/explicit_animations/explicit_animations.dart';
+import 'package:flutter_animations/implicit_animations/implicit_animations.dart';
 
 import 'lottie_animations/lottie_animations.dart';
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: LottieAnimations(),
+      home: ImplicitAnimations(),
     );
   }
 }
