@@ -11,28 +11,83 @@ class HeroAnimations extends StatefulWidget {
 }
 
 class _HeroAnimationsState extends State<HeroAnimations> {
+  void _openDetailPage() {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 900),
+        reverseTransitionDuration: const Duration(milliseconds: 700),
+        pageBuilder: (_, animation, secondaryAnimation) => const DetailScreen(),
+
+        // Custom transition curve
+        transitionsBuilder: (_, animation, __, child) {
+          final curved = CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInOutBack,
+          );
+
+          return FadeTransition(
+            opacity: curved,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HeroAnimations'),
+        title: const Text('Hero Animations'),
         centerTitle: true,
         backgroundColor: Colors.lightGreenAccent,
         elevation: 1,
       ),
+
       body: Column(
         children: [
           ListTile(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>LottieAnimations()));
-            },
+            onTap: _openDetailPage,
             leading: Hero(
               tag: 'iPhone',
+              // Custom Hero animation (scale + fade)
+
+              flightShuttleBuilder: (flightContext, animation, direction, from, to) {
+                return ScaleTransition(
+                  scale: animation.drive(
+                    Tween<double>(begin: 0.5, end: 1.0)
+                        .chain(CurveTween(curve: Curves.fastEaseInToSlowEaseOut),
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    clipBehavior: Clip.hardEdge,
+                    child: Image.asset(
+                      'assets/images/iphone_pic.jpeg',
+                      width: 60,
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
+
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/iphone_pic.jpeg'),
+                radius: 28,
+                backgroundImage: const AssetImage('assets/images/iphone_pic.jpeg'),
               ),
             ),
-            title: Text('iPhone 17 Pro Max'),
+
+            title: const Text(
+              'iPhone 17 Pro Max',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+
+            subtitle: const Text(
+              'Tap to view details',
+              style: TextStyle(fontSize: 12, color: Colors.black54),
+            ),
           ),
         ],
       ),
