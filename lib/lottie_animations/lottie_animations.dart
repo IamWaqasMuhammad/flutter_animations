@@ -46,85 +46,50 @@ class _LottieAnimationsState extends State<LottieAnimations> {
       ),
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  'Free iPhone Order Now!!',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                SizedBox(height: 50),
-                Container(
+          Column(
+            children: [
+              Hero(
+                tag: 'iPhone',
+                child: Container(
                   height: 300,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
                       image: AssetImage('assets/images/iphone_pic.jpeg'),
                       fit: BoxFit.cover,
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 10,
-                          child: Text(
-                            'iPhone 17 Pro Max - Orange Color - 2TB for Free ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          child: Text(
-                            'Just Click below button\nPlace Order right now!',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+
                   ),
                 ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: _onOrderNowPressed,
-                  splashColor: Colors.grey,
-                  child: Container(
-                    height: 50,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Order Now!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800,
-                        ),
+              ),
+              SizedBox(height: 20),
+              InkWell(
+                onTap: _onOrderNowPressed,
+                splashColor: Colors.grey,
+                child: Container(
+                  height: 50,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Order Now!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
 
           // Delivery Animation (full screen with transparent background)
@@ -133,7 +98,7 @@ class _LottieAnimationsState extends State<LottieAnimations> {
               color: Colors.black.withOpacity(0.2), // optional semi-transparent overlay
               alignment: Alignment.center,
               child: Lottie.asset(
-                'assets/animations/loading_car.json',
+                'assets/animations/Loading_car.json',
                 width: 200,
                 height: 200,
                 fit: BoxFit.contain,
